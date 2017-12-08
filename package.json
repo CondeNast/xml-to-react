@@ -12,7 +12,7 @@
   "scripts": {
     "build": "rollup -c",
     "clean": "rm -rf dist",
-    "prepublish": "npm run clean && npm run build",
+    "prepublishOnly": "npm run clean && npm run build",
     "test": "mocha --require babel-register --recursive"
   },
   "repository": "https://github.com/CondeNast/xml-to-react",
