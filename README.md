@@ -24,12 +24,13 @@ const reactTree = xmlToReact.convert(/* XML string */);
 Convert XML nodes into DOM elements with any provided attributes
 
 ```js
-import React from 'react';
+import ReactDOM from 'react-dom';
 import XMLToReact from 'xml-to-react';
+import MyListItem from './MyListItem';
 
 const xmlToReact = new XMLToReact({
   Example: (attrs) => ({ type: 'ul', props: attrs }),
-  Item: (attrs) => ({ type: 'li', props: attrs })
+  Item: (attrs) => ({ type: MyListItem, props: attrs })
 });
 
 const reactTree = xmlToReact.convert(`
@@ -40,15 +41,21 @@ const reactTree = xmlToReact.convert(`
   </Example>
 `);
 
-React.render('app-container', reactTree);
+ReactDOM.render('app-container', reactTree);
 ```
 
-Renders the following
+```jsx
+export default function MyListItem({ children, i }) {
+  return <li data-i={i}>{children}</li>;
+}
+```
+
+This example would render the following:
 
 ```html
 <div id="app-container">
   <ul name="simple">
-    <li i="1">one</li>
+    <li data-i="1">one</li>
     <li>two</li>
     <li>three</li>
   </ul>
@@ -60,7 +67,7 @@ Renders the following
 Converters are required mapping functions that define how an XML node should be converted to React. A converter must return an object in the format `{ type, [props] }`, which is intended to be passed to [`React.createElement`](https://reactjs.org/docs/react-api.html#createelement).
 
 - `type` - required tagName, React component, or React fragment
-- `props` - optional props object
+- `props` - (optional) props object
 
 #### Example
 
@@ -81,7 +88,7 @@ The `XMLToReact` class is instantiated with a map of converters.
 
 ```js
 {
-  [nodeName]: converterFunction
+  nodeName: converterFunction
 }
 ```
 
