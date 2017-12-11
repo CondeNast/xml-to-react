@@ -12,7 +12,9 @@
   "scripts": {
     "build": "rollup -c",
     "clean": "rm -rf dist",
+    "lint": "eslint .",
     "prepublishOnly": "npm run clean && npm run build",
+    "pretest": "eslint .",
     "test": "nyc mocha --require babel-register --recursive"
   },
   "repository": "https://github.com/CondeNast/xml-to-react",
@@ -36,6 +38,7 @@
     "chai": "^4.1.2",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",
+    "eslint": "^4.13.0",
     "mocha": "^4.0.1",
     "nyc": "^11.3.0",
     "react": "^16.2.0",
