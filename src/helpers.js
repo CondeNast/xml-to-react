@@ -82,7 +82,7 @@ export function getChildren(node) {
  * @return {Object} React element
  * @private
  */
-export function visitNode(node, index, converters, data) {
+export function visitNode(node, index, converters, data, onConverterNotFound) {
   if (!node) {
     return null;
   }
@@ -98,10 +98,17 @@ export function visitNode(node, index, converters, data) {
     return null;
   }
 
-  const converter = converters[tagName];
+  let converter = converters[tagName];
 
   if (typeof converter !== 'function') {
-    return null;
+    // Allow onConverterNotFound to dictate default behavior
+    const handled = onConverterNotFound(node);
+    if (handled) {
+      return handled;
+    }
+
+    // Default converter
+    converter = (attributes, data) => ({ type: tagName, props: attributes });
   }
 
   const attributes = getAttributes(node);

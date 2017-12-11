@@ -3,6 +3,8 @@ import { validateConverters, visitNode } from './helpers';
 
 const ERR_INVALID_XML = 'XMLToReact: Unable to parse invalid XML input. Please input valid XML.';
 
+const noop = () => {};
+
 const throwError = (m) => { throw new Error(m); };
 
 const parser = new DOMParser({
@@ -22,16 +24,18 @@ export default class XMLToReact {
 
   /*
    * Create a XML to React converter.
-   * @param {Object} converters - a mapping of tag names to a function returning the desired mapping.
+   * @param {Object} [converters] - a mapping of tag names to a function returning the desired mapping.
+   * @param {Object} [options] - instance options
+   * @param {Function} [options.onConverterNotFound] - optional callback for when a node has no matching converter
    * @public
    */
-  constructor(converters) {
-    const isValid = validateConverters(converters);
-    if (!isValid) {
+  constructor(converters, options = {}) {
+    if (converters && !validateConverters(converters)) {
       throw new Error(ERR_INVALID_CONVERTER);
     }
 
-    this.converters = converters;
+    this.converters = converters || {};
+    this.onConverterNotFound = options.onConverterNotFound || noop;
   }
 
 
@@ -56,7 +60,6 @@ export default class XMLToReact {
       return null;
     }
 
-    return visitNode(tree.documentElement, 0, this.converters, data);
+    return visitNode(tree.documentElement, 0, this.converters, data, this.onConverterNotFound);
   }
 }
-
