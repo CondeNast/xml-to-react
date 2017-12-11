@@ -13,7 +13,7 @@
     "build": "rollup -c",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build",
-    "test": "mocha --require babel-register --recursive"
+    "test": "nyc mocha --require babel-register --recursive"
   },
   "repository": "https://github.com/CondeNast/xml-to-react",
   "contributors": [
@@ -36,6 +36,7 @@
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",
     "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "rollup": "^0.52.1",
