@@ -115,4 +115,3 @@ export function visitNode(node, index, converters, data) {
 
   return createElement(type, newProps, ...childElements);
 };
-
