@@ -13,13 +13,14 @@ const parser = new DOMParser({
 });
 
 
-/*
+/**
  * Class representing an XML to React transformer.
  * @public
  */
 export default class XMLToReact {
-  /*
+  /**
    * Create a XML to React converter.
+   *
    * @param {Object} converters - a mapping of tag names to a function
    *                              returning the desired mapping.
    * @public
@@ -34,8 +35,9 @@ export default class XMLToReact {
   }
 
 
-  /*
+  /**
    * Create a XML to React converter.
+   *
    * @param {string} xml - xml to convert
    * @param {Object} [data] - optional data to assist in conversion
    * @returns {Object} - React element tree
@@ -58,4 +60,3 @@ export default class XMLToReact {
     return visitNode(tree.documentElement, 0, this.converters, data);
   }
 }
-
