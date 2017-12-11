@@ -15,12 +15,6 @@
     "prepublishOnly": "npm run clean && npm run build",
     "test": "nyc mocha --require babel-register --recursive"
   },
-  "nyc": {
-    "reporter": [
-      "lcov",
-      "text"
-    ]
-  },
   "repository": "https://github.com/CondeNast/xml-to-react",
   "contributors": [
     "Daniel Taveras <daniel_taveras@condenast.com>"
