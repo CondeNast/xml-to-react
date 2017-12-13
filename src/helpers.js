@@ -10,7 +10,7 @@ const ERR_INVALID_CONVERTER = 'XMLToReact: Invalid value for converter map argum
  * @private
  */
 export function validateConverters(converters) {
-  if (typeof converters !== 'object') {
+  if (typeof converters !== 'object' || !converters) {
     return false;
   }
 

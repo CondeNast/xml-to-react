@@ -57,11 +57,7 @@ describe('helpers', () => {
       expect(validateConverters(5)).to.be.false;
       expect(validateConverters(true)).to.be.false;
       expect(validateConverters(() => {})).to.be.false;
-    });
-
-    // @TODO fix this?
-    it('should throw an error if called with `null`', () => {
-      expect(() => validateConverters(null)).to.throw(Error);
+      expect(validateConverters(null)).to.be.false;
     });
   });
 
