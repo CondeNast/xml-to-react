@@ -1,17 +1,7 @@
-import { DOMParser } from 'xmldom';
+import { parse } from './parser';
 import { validateConverters, visitNode } from './helpers';
 
-const ERR_INVALID_XML = 'XMLToReact: Unable to parse invalid XML input. Please input valid XML.';
 const ERR_INVALID_CONVERTERS = 'XMLToReact: Invalid value for converter map argument. Please use an object with functions as values.';
-
-const throwError = (m) => { throw new Error(m); };
-
-const parser = new DOMParser({
-  errorHandler: throwError,
-  fatalError: throwError,
-  warning: throwError,
-});
-
 
 /**
  * Class representing an XML to React transformer.
@@ -48,12 +38,8 @@ export default class XMLToReact {
       return null;
     }
 
-    let tree;
-
-    try {
-      tree = parser.parseFromString(xml, 'text/xml');
-    } catch (e) {
-      console.warn(ERR_INVALID_XML);
+    const tree = parse(xml);
+    if (!tree) {
       return null;
     }
 

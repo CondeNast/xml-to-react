@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import { DOMParser } from 'xmldom';
 import { isValidElement } from 'react';
 import sinon from 'sinon';
+import { parse as parseXML } from '../src/parser';
 import {
   validateConverters,
   getAttributes,
@@ -10,19 +11,6 @@ import {
 } from '../src/helpers';
 
 describe('helpers', () => {
-  let parseXML;
-
-  before(() => {
-    // `parseXML` test helper to create XML nodes from strings
-    const throwError = (m) => { throw new Error(m); };
-    const parser = new DOMParser({
-      errorHandler: throwError,
-      fatalError: throwError,
-      warning: throwError,
-    });
-    parseXML = xml => parser.parseFromString(xml, 'text/xml');
-  });
-
   describe('validateConverters', () => {
     it('should export a function', () => {
       expect(validateConverters).to.be.a('function');
