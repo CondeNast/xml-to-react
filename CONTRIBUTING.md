@@ -6,7 +6,7 @@ The following is a set of guidelines for contributing to XML-to-React which is h
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by a [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [opensource@condenast.com].
+This project and everyone participating in it is governed by a [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [opensource@condenast.com](mailto:opensource@condenast.com).
 
 ## How to contribute to XML-to-React
 
