@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-expressions */
-
-import { describe, it, before } from 'mocha';
 import { expect } from 'chai';
 import { DOMParser } from 'xmldom';
 import { isValidElement } from 'react';
@@ -37,7 +34,7 @@ describe('helpers', () => {
         bar: () => {},
         baz: () => {},
       };
-      expect(validateConverters(converters)).to.be.true;
+      expect(validateConverters(converters)).to.equal(true);
     });
 
     it('should return `false` if any property is not a function', () => {
@@ -46,21 +43,21 @@ describe('helpers', () => {
         bar: 5,
         baz: () => {},
       };
-      expect(validateConverters(converters)).to.be.false;
+      expect(validateConverters(converters)).to.equal(false);
     });
 
     it('should return `false` if passed an empty object', () => {
-      expect(validateConverters({})).to.be.false;
-      expect(validateConverters([])).to.be.false;
+      expect(validateConverters({})).to.equal(false);
+      expect(validateConverters([])).to.equal(false);
     });
 
     it('should return `false` if not provided an object', () => {
-      expect(validateConverters()).to.be.false;
-      expect(validateConverters('hello')).to.be.false;
-      expect(validateConverters(5)).to.be.false;
-      expect(validateConverters(true)).to.be.false;
-      expect(validateConverters(() => {})).to.be.false;
-      expect(validateConverters(null)).to.be.false;
+      expect(validateConverters()).to.equal(false);
+      expect(validateConverters('hello')).to.equal(false);
+      expect(validateConverters(5)).to.equal(false);
+      expect(validateConverters(true)).to.equal(false);
+      expect(validateConverters(() => {})).to.equal(false);
+      expect(validateConverters(null)).to.equal(false);
     });
   });
 
@@ -124,7 +121,7 @@ describe('helpers', () => {
     });
 
     it('should return `null` by default', () => {
-      expect(visitNode()).to.be.null;
+      expect(visitNode()).to.equal(null);
     });
 
     it('should return the value of a text node', () => {
@@ -135,12 +132,12 @@ describe('helpers', () => {
     it('should return `null` if no converter is registered by tagName for the given node', () => {
       const converters = {};
       const { firstChild } = parseXML('<a>hello</a>');
-      expect(visitNode(firstChild, 0, converters)).to.be.null;
+      expect(visitNode(firstChild, 0, converters)).to.equal(null);
     });
 
     it('should return `null` if node has no tagName', () => {
       const { firstChild } = parseXML('<!-- comment here -->');
-      expect(visitNode(firstChild, 0, {})).to.be.null;
+      expect(visitNode(firstChild, 0, {})).to.equal(null);
     });
 
     it('should execute a registered converter with attributes and data', () => {
@@ -159,7 +156,7 @@ describe('helpers', () => {
       };
       const { firstChild } = parseXML('<a>hello</a>');
       const element = visitNode(firstChild, 0, converters);
-      expect(isValidElement(element)).to.be.true;
+      expect(isValidElement(element)).to.equal(true);
       expect(element.type).to.equal('foo');
     });
 
@@ -213,16 +210,16 @@ describe('helpers', () => {
       const { firstChild } = parseXML('<Animals><Dog>Rufus</Dog><Cat>Billy</Cat></Animals>');
       const element = visitNode(firstChild, 0, converters);
 
-      expect(isValidElement(element)).to.be.true;
+      expect(isValidElement(element)).to.equal(true);
       expect(element.type).to.equal('ul');
       expect(element.props.children).to.have.length(2);
       const [dog, cat] = element.props.children;
 
-      expect(isValidElement(dog)).to.be.true;
+      expect(isValidElement(dog)).to.equal(true);
       expect(dog.type).to.equal('li');
       expect(dog.props).to.eql({ action: 'wag', children: 'Rufus' });
 
-      expect(isValidElement(cat)).to.be.true;
+      expect(isValidElement(cat)).to.equal(true);
       expect(cat.type).to.equal('li');
       expect(cat.props).to.eql({ action: 'purr', children: 'Billy' });
     });

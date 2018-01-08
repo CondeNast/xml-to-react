@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-expressions */
-
-import { describe, it, before, beforeEach, after } from 'mocha';
 import { expect } from 'chai';
 import { createSandbox } from 'sinon';
 import React from 'react';
@@ -15,13 +12,13 @@ configure({ adapter: new Adapter() });
 
 describe('XMLToReact class ', () => {
   const TestComponent = ({ fancy, children }) => {
-    const classes = fancy ? 'test fancy' : 'test';
-    return React.createElement('div', { className: classes }, children);
+    const className = fancy ? 'test fancy' : 'test';
+    return React.createElement('div', { className }, children);
   };
 
   TestComponent.propTypes = {
     fancy: PropTypes.bool,
-    children: PropTypes.arrayOf(PropTypes.element),
+    children: PropTypes.arrayOf(PropTypes.node),
   };
 
   TestComponent.defaultProps = {
@@ -85,8 +82,8 @@ describe('XMLToReact class ', () => {
           const xmltoreact = new XMLToReact(converters);
           const tree = xmltoreact.convert(badXML);
 
-          expect(tree).to.be.null;
-          expect(visitNodeSpy.called).to.be.false;
+          expect(tree).to.equal(null);
+          expect(visitNodeSpy.called).to.equal(false);
         });
       });
 
@@ -96,8 +93,8 @@ describe('XMLToReact class ', () => {
           const xmltoreact = new XMLToReact(converters);
           const tree = xmltoreact.convert(badXML);
 
-          expect(tree).to.be.null;
-          expect(visitNodeSpy.called).to.be.false;
+          expect(tree).to.equal(null);
+          expect(visitNodeSpy.called).to.equal(false);
         });
       });
 
@@ -107,7 +104,7 @@ describe('XMLToReact class ', () => {
 
       const tree = xmltoreact.convert(mockXML);
 
-      expect(tree).to.be.null;
+      expect(tree).to.equal(null);
     });
 
     it('returns a React element tree with valid, simple XML without data', () => {
@@ -116,11 +113,11 @@ describe('XMLToReact class ', () => {
 
       const tree = xmltoreact.convert(mockXML);
 
-      expect(tree).not.to.be.null;
+      expect(tree).not.to.equal(null);
 
       const wrapper = shallow(tree);
 
-      expect(wrapper.exists()).to.be.true;
+      expect(wrapper.exists()).to.equal(true);
       expect(wrapper.find('.test')).to.have.length(1);
     });
 
@@ -135,11 +132,11 @@ describe('XMLToReact class ', () => {
 
       const tree = xmltoreact.convert(mockXML);
 
-      expect(tree).not.to.be.null;
+      expect(tree).not.to.equal(null);
 
       const wrapper = shallow(tree);
 
-      expect(wrapper.exists()).to.be.true;
+      expect(wrapper.exists()).to.equal(true);
       expect(wrapper.find('.test > [fancy]')).to.have.length(1);
     });
 
@@ -148,11 +145,11 @@ describe('XMLToReact class ', () => {
       const mockXML = '<test-tag />';
       const tree = xmltoreact.convert(mockXML, mockData);
 
-      expect(tree).not.to.be.null;
+      expect(tree).not.to.equal(null);
 
       const wrapper = shallow(tree);
 
-      expect(wrapper.exists()).to.be.true;
+      expect(wrapper.exists()).to.equal(true);
       expect(wrapper.find('.test')).to.have.length(1);
     });
 
@@ -163,11 +160,11 @@ describe('XMLToReact class ', () => {
           const mockXML = '<test-tag />';
           const tree = xmltoreact.convert(mockXML, badData);
 
-          expect(tree).not.to.be.null;
+          expect(tree).not.to.equal(null);
 
           const wrapper = shallow(tree);
 
-          expect(wrapper.exists()).to.be.true;
+          expect(wrapper.exists()).to.equal(true);
           expect(wrapper.find('.test')).to.have.length(1);
         });
       });
