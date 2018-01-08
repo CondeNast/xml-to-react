@@ -2,15 +2,15 @@ import { DOMParser } from 'xmldom';
 import { validateConverters, visitNode } from './helpers';
 
 const ERR_INVALID_XML = 'XMLToReact: Unable to parse invalid XML input. Please input valid XML.';
+const ERR_INVALID_CONVERTERS = 'XMLToReact: Invalid value for converter map argument. Please use an object with functions as values.';
 
 const throwError = (m) => { throw new Error(m); };
 
 const parser = new DOMParser({
   errorHandler: throwError,
   fatalError: throwError,
-  warning: throwError
+  warning: throwError,
 });
-
 
 
 /*
@@ -18,17 +18,16 @@ const parser = new DOMParser({
  * @public
  */
 export default class XMLToReact {
-
-
   /*
    * Create a XML to React converter.
-   * @param {Object} converters - a mapping of tag names to a function returning the desired mapping.
+   * @param {Object} converters - a mapping of tag names to a function
+   *                              returning the desired mapping.
    * @public
    */
   constructor(converters) {
     const isValid = validateConverters(converters);
     if (!isValid) {
-      throw new Error(ERR_INVALID_CONVERTER);
+      throw new Error(ERR_INVALID_CONVERTERS);
     }
 
     this.converters = converters;

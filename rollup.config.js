@@ -15,9 +15,9 @@ export default [
         file: pkg.browser,
         format: 'umd',
         globals: {
-          react: 'React'
-        }
-      }
+          react: 'React',
+        },
+      },
     ],
     plugins: [
       nodeResolve({ preferBuiltins: true }),
@@ -25,9 +25,9 @@ export default [
       peerDeps(),
       babel({
         presets: ['es2015-rollup'],
-        babelrc: false
-      })
-    ]
+        babelrc: false,
+      }),
+    ],
   },
   {
     input: 'src/XMLToReact.js',
@@ -38,8 +38,8 @@ export default [
       },
       {
         file: pkg.module,
-        format: 'es'
-      }
+        format: 'es',
+      },
     ],
     external: ['xmldom'],
     plugins: [
@@ -47,8 +47,8 @@ export default [
       peerDeps(),
       babel({
         presets: ['es2015-rollup'],
-        babelrc: false
-      })
-    ]
-  }
+        babelrc: false,
+      }),
+    ],
+  },
 ];
