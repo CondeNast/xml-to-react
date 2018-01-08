@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-expressions */
+
+import { describe, it, before } from 'mocha';
 import { expect } from 'chai';
 import { DOMParser } from 'xmldom';
 import { isValidElement } from 'react';
@@ -6,7 +9,7 @@ import {
   validateConverters,
   getAttributes,
   getChildren,
-  visitNode
+  visitNode,
 } from '../src/helpers';
 
 describe('helpers', () => {
@@ -18,9 +21,9 @@ describe('helpers', () => {
     const parser = new DOMParser({
       errorHandler: throwError,
       fatalError: throwError,
-      warning: throwError
+      warning: throwError,
     });
-    parseXML = (xml) => parser.parseFromString(xml, 'text/xml');
+    parseXML = xml => parser.parseFromString(xml, 'text/xml');
   });
 
   describe('validateConverters', () => {
@@ -32,7 +35,7 @@ describe('helpers', () => {
       const converters = {
         foo: () => {},
         bar: () => {},
-        baz: () => {}
+        baz: () => {},
       };
       expect(validateConverters(converters)).to.be.true;
     });
@@ -41,7 +44,7 @@ describe('helpers', () => {
       const converters = {
         foo: () => {},
         bar: 5,
-        baz: () => {}
+        baz: () => {},
       };
       expect(validateConverters(converters)).to.be.false;
     });
@@ -83,7 +86,7 @@ describe('helpers', () => {
       expect(getAttributes(firstChild)).to.eql({
         foo: 'hello',
         bar: '5',
-        baz: 'true'
+        baz: 'true',
       });
     });
   });
@@ -110,7 +113,7 @@ describe('helpers', () => {
       expect(getChildren(firstChild)).to.eql([
         childNodes[0],
         childNodes[1],
-        childNodes[2]
+        childNodes[2],
       ]);
     });
   });
@@ -142,9 +145,9 @@ describe('helpers', () => {
 
     it('should execute a registered converter with attributes and data', () => {
       const converters = {
-        a: sinon.stub().returns({ type: 'foo', props: {} })
+        a: sinon.stub().returns({ type: 'foo', props: {} }),
       };
-      const data = { foo: 'bar' }
+      const data = { foo: 'bar' };
       const { firstChild } = parseXML('<a x="1" y="two">hello</a>');
       visitNode(firstChild, 0, converters, data);
       sinon.assert.calledWith(converters.a, { x: '1', y: 'two' }, data);
@@ -152,7 +155,7 @@ describe('helpers', () => {
 
     it('should create a React element with type provided by the converter', () => {
       const converters = {
-        a: attrs => ({ type: 'foo', props: {} })
+        a: () => ({ type: 'foo', props: {} }),
       };
       const { firstChild } = parseXML('<a>hello</a>');
       const element = visitNode(firstChild, 0, converters);
@@ -165,22 +168,22 @@ describe('helpers', () => {
         a: attrs => ({
           type: 'foo',
           props: {
-            keys: Object.keys(attrs)
-          }
-        })
+            keys: Object.keys(attrs),
+          },
+        }),
       };
-      const data = { foo: 'bar' }
+      const data = { foo: 'bar' };
       const { firstChild } = parseXML('<a x="1" y="two">hello</a>');
       const element = visitNode(firstChild, 0, converters, data);
       expect(element.props).to.eql({
         children: 'hello',
-        keys: ['x', 'y']
+        keys: ['x', 'y'],
       });
     });
 
     it('should assign a key prop, given the current child index', () => {
       const converters = {
-        a: attrs => ({ type: 'foo', props: {} })
+        a: () => ({ type: 'foo', props: {} }),
       };
       const { firstChild } = parseXML('<a>hello</a>');
       const element = visitNode(firstChild, 55, converters);
@@ -190,13 +193,13 @@ describe('helpers', () => {
     it('should not mutate the props object returned by the converter', () => {
       const props = { foo: 'bar' };
       const converters = {
-        a: attrs => ({ type: 'foo', props })
+        a: () => ({ type: 'foo', props }),
       };
       const { firstChild } = parseXML('<a>hello</a>');
       const element = visitNode(firstChild, 55, converters);
       expect(element.props).to.eql({
         foo: 'bar',
-        children: 'hello'
+        children: 'hello',
       });
       expect(props).to.eql({ foo: 'bar' });
     });
@@ -205,16 +208,15 @@ describe('helpers', () => {
       const converters = {
         Animals: () => ({ type: 'ul', props: {} }),
         Cat: () => ({ type: 'li', props: { action: 'purr' } }),
-        Dog: () => ({ type: 'li', props: { action: 'wag' } })
+        Dog: () => ({ type: 'li', props: { action: 'wag' } }),
       };
       const { firstChild } = parseXML('<Animals><Dog>Rufus</Dog><Cat>Billy</Cat></Animals>');
-      const { childNodes } = firstChild;
       const element = visitNode(firstChild, 0, converters);
 
       expect(isValidElement(element)).to.be.true;
       expect(element.type).to.equal('ul');
       expect(element.props.children).to.have.length(2);
-      const [ dog, cat ] = element.props.children;
+      const [dog, cat] = element.props.children;
 
       expect(isValidElement(dog)).to.be.true;
       expect(dog.type).to.equal('li');
@@ -225,5 +227,4 @@ describe('helpers', () => {
       expect(cat.props).to.eql({ action: 'purr', children: 'Billy' });
     });
   });
-
 });

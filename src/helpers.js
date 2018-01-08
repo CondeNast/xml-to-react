@@ -1,7 +1,5 @@
 import { createElement } from 'react';
 
-const ERR_INVALID_CONVERTER = 'XMLToReact: Invalid value for converter map argument. Please use an object with functions as values.';
-
 
 /**
  * Validates a given converters input
@@ -23,7 +21,7 @@ export function validateConverters(converters) {
 
   const isFunction = key => (typeof converters[key] === 'function');
   return keys.every(isFunction);
-};
+}
 
 
 /**
@@ -43,13 +41,15 @@ export function getAttributes(node) {
     return {};
   }
 
-  return Array.from(attributes)
-    .reduce((results, attr) => {
-      const { name, value } = attr;
-      results[name] = value;
-      return results;
-    }, {});
-};
+  const result = {};
+
+  Array.from(attributes)
+    .forEach(({ name, value }) => {
+      result[name] = value;
+    });
+
+  return result;
+}
 
 
 /**
@@ -70,7 +70,7 @@ export function getChildren(node) {
   }
 
   return children.length ? Array.from(children) : [];
-};
+}
 
 
 /**
@@ -109,9 +109,8 @@ export function visitNode(node, index, converters, data) {
   const newProps = Object.assign({}, { key: index }, props);
 
   const children = getChildren(node);
-  const childElements = children.map((child, childIndex) =>
-    visitNode(child, childIndex, converters, data)
-  );
+  const visitChildren = (child, childIndex) => visitNode(child, childIndex, converters, data);
+  const childElements = children.map(visitChildren);
 
   return createElement(type, newProps, ...childElements);
-};
+}

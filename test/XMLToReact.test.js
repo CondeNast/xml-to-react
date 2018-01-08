@@ -1,6 +1,10 @@
-import React from 'react';
+/* eslint-disable no-unused-expressions */
+
+import { describe, it, before, beforeEach, after } from 'mocha';
 import { expect } from 'chai';
-import { createSandbox  } from 'sinon';
+import { createSandbox } from 'sinon';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -10,92 +14,94 @@ import { visitNode } from '../src/helpers';
 configure({ adapter: new Adapter() });
 
 describe('XMLToReact class ', () => {
+  const TestComponent = ({ fancy, children }) => {
+    const classes = fancy ? 'test fancy' : 'test';
+    return React.createElement('div', { className: classes }, children);
+  };
 
-  function TestComponent(props) {
-    const classes = props.fancy ? 'test fancy' : 'test';
-    return <div className={classes}>{props.children}</div>;
+  TestComponent.propTypes = {
+    fancy: PropTypes.bool,
+    children: PropTypes.arrayOf(PropTypes.element),
+  };
+
+  TestComponent.defaultProps = {
+    children: null,
+    fancy: false,
   };
 
   const converters = {
-    'test-tag': (attributes) => ({
+    'test-tag': attributes => ({
       type: TestComponent,
-      props: attributes
+      props: attributes,
     }),
-    'fancy-test-tag': (attributes, data) => ({
+    'fancy-test-tag': attributes => ({
       type: TestComponent,
-      props: Object.assign({}, attributes, { fancy: true })
-    })
+      props: Object.assign({}, attributes, { fancy: true }),
+    }),
   };
 
   const mockData = {
     name: 'Simba',
-    job: 'King'
+    job: 'King',
   };
 
-  it('exports a module', function () {
+  it('exports a module', () => {
     expect(XMLToReact).to.be.a('function');
   });
 
-  describe('#constructor', function () {
-
-    it('returns an XMLToReact instance', function () {
+  describe('#constructor', () => {
+    it('returns an XMLToReact instance', () => {
       expect(new XMLToReact(converters)).to.be.an.instanceof(XMLToReact);
     });
 
     [123, false, true, {}, [], null, undefined]
-      .forEach(function (badConverters) {
-        it(`returns an XMLToReact instance with invalid converters (${typeof badConverters} -- ${badConverters})`, function () {
+      .forEach((badConverters) => {
+        it(`returns an XMLToReact instance with invalid converters (${typeof badConverters} -- ${badConverters})`, () => {
           const fn = () => new XMLToReact(badConverters);
           expect(fn).to.throw(Error);
         });
       });
-
   });
 
-  describe('#convert', function () {
-
-    let sandbox = createSandbox();
+  describe('#convert', () => {
+    const sandbox = createSandbox();
     let visitNodeSpy;
 
-    before(function () {
+    before(() => {
       visitNodeSpy = sandbox.spy(visitNode);
     });
 
-    beforeEach(function () {
-      sandbox.reset();
+    beforeEach(() => {
+      sandbox.resetHistory();
     });
 
-    after(function () {
+    after(() => {
       sandbox.restore();
     });
 
     [123, false, true, {}, [], null, undefined]
-      .forEach(function (badXML) {
-
-        it(`returns null when XML input is not a string (${typeof badXML} -- ${badXML})`, function () {
+      .forEach((badXML) => {
+        it(`returns null when XML input is not a string (${typeof badXML} -- ${badXML})`, () => {
           const xmltoreact = new XMLToReact(converters);
           const tree = xmltoreact.convert(badXML);
 
           expect(tree).to.be.null;
           expect(visitNodeSpy.called).to.be.false;
         });
-
       });
 
     ['', '< test-tag />', '</test-tag', '<1234>', '<test-tag']
-      .forEach(function (badXML) {
-
-        it(`returns null tree when input is invalid XML "${badXML}"`, function () {
+      .forEach((badXML) => {
+        it(`returns null tree when input is invalid XML "${badXML}"`, () => {
           const xmltoreact = new XMLToReact(converters);
           const tree = xmltoreact.convert(badXML);
 
           expect(tree).to.be.null;
           expect(visitNodeSpy.called).to.be.false;
         });
-
       });
 
-    it('returns null for with valid XML tags which do not have an associated converter', function () {
+    it('returns null for with valid XML tags which do not have an associated converter', () => {
       const xmltoreact = new XMLToReact(converters);
       const mockXML = '<fake-tag />';
 
@@ -104,7 +110,7 @@ describe('XMLToReact class ', () => {
       expect(tree).to.be.null;
     });
 
-    it('returns a React element tree with valid, simple XML without data', function () {
+    it('returns a React element tree with valid, simple XML without data', () => {
       const xmltoreact = new XMLToReact(converters);
       const mockXML = '<test-tag />';
 
@@ -119,7 +125,7 @@ describe('XMLToReact class ', () => {
     });
 
 
-    it('returns a React element tree with valid, complex XML without data', function () {
+    it('returns a React element tree with valid, complex XML without data', () => {
       const xmltoreact = new XMLToReact(converters);
       const mockXML = `
         <test-tag>
@@ -137,7 +143,7 @@ describe('XMLToReact class ', () => {
       expect(wrapper.find('.test > [fancy]')).to.have.length(1);
     });
 
-    it('returns a React element tree with valid XML and valid data', function () {
+    it('returns a React element tree with valid XML and valid data', () => {
       const xmltoreact = new XMLToReact(converters);
       const mockXML = '<test-tag />';
       const tree = xmltoreact.convert(mockXML, mockData);
@@ -151,8 +157,8 @@ describe('XMLToReact class ', () => {
     });
 
     [123, false, true, {}, [], null, undefined]
-      .forEach(function (badData) {
-        it(`returns a React element tree with valid XML, but with invalid data ${typeof badData} -- ${badData}`, function () {
+      .forEach((badData) => {
+        it(`returns a React element tree with valid XML, but with invalid data ${typeof badData} -- ${badData}`, () => {
           const xmltoreact = new XMLToReact(converters);
           const mockXML = '<test-tag />';
           const tree = xmltoreact.convert(mockXML, badData);
@@ -165,8 +171,6 @@ describe('XMLToReact class ', () => {
           expect(wrapper.find('.test')).to.have.length(1);
         });
       });
-
   });
-
 });
 

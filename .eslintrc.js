@@ -1,6 +1,6 @@
 module.exports = {
   extends: [
-    'eslint-config-airbnb'
+    'airbnb'
   ],
   parserOptions: {
     ecmaVersion: 6,
