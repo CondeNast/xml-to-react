@@ -11,8 +11,5 @@ module.exports = {
   },
   env: {
     mocha: true,
-    browser: true,
-    node: true,
-    es6: true
   }
 };
