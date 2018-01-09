@@ -41,14 +41,8 @@ export function getAttributes(node) {
     return {};
   }
 
-  const result = {};
-
-  Array.from(attributes)
-    .forEach(({ name, value }) => {
-      result[name] = value;
-    });
-
-  return result;
+  return Array.from(attributes)
+    .reduce((results, { name, value }) => Object.assign({}, results, { [name]: value }), {});
 }
 
 
