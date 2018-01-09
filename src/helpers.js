@@ -42,7 +42,8 @@ export function getAttributes(node) {
   }
 
   return Array.from(attributes)
-    .reduce((results, { name, value }) => Object.assign({}, results, { [name]: value }), {});
+    .reduce((results, { name, value }) =>
+      Object.assign({}, results, { [name]: value }), {});
 }
 
 
