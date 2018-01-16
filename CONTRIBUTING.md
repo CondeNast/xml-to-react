@@ -10,20 +10,17 @@ This project and everyone participating in it is governed by a [Code of Conduct]
 
 ## How to contribute to XML-to-React
 
-#### Did you find a bug?
+#### Did you find a bug, want to add a feature, or have questions about the code?
 
-Open a [new issue](https://github.com/CondeNast/xml-to-react/issues/new) making sure to include to include a **title and clear description** of the bug.
+Open a [new issue](https://github.com/CondeNast/xml-to-react/issues/new). Follow the provided template as a guideline.
 
 #### Did you write a patch that fixes a bug?
 
-* Open a new GitHub pull request with the patch.
-
-* Ensure the PR description clearly describes the problem and solution. Include the relevant issue number if applicable.
+Open a new pull request. Follow the provided template as a guideline.
 
 #### Do you intend to add a new feature or change an existing one?
 
 * Suggest your change by opening a [new issue](https://github.com/CondeNast/xml-to-react/issues/new) and start writing code.
-
 
 #### Do you have questions about the source code?
 
