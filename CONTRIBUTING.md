@@ -18,14 +18,6 @@ Open a [new issue](https://github.com/CondeNast/xml-to-react/issues/new). Follow
 
 Open a new pull request. Follow the provided template as a guideline.
 
-#### Do you intend to add a new feature or change an existing one?
-
-* Suggest your change by opening a [new issue](https://github.com/CondeNast/xml-to-react/issues/new) and start writing code.
-
-#### Do you have questions about the source code?
-
-Open a [new issue](https://github.com/CondeNast/xml-to-react/issues/new) making sure to include to include a **title and clear description**.
-
 ### Attribution
 These Contributing Guidelines are adapted from the [Atom](https://github.com/atom/atom) Contributing Guidelines,
 available at https://github.com/atom/atom/blob/master/CONTRIBUTING.md and the [Rails](https://github.com/rails/rails/blob/master/CONTRIBUTING.md) Contributing Guidelines available at https://github.com/rails/rails/blob/master/CONTRIBUTING.md.
