@@ -8,6 +8,10 @@ _Proudly built by:_
 
 <a href="https://technology.condenast.com"><img src="https://user-images.githubusercontent.com/1215971/35070721-3f136cdc-fbac-11e7-81b4-e3aa5cc70a17.png" title="Conde Nast Technology" width=350/></a>
 
+## Prerequisites
+
+- React 0.13.x or greater
+
 ## Installation
 
 ```sh
@@ -106,6 +110,20 @@ The `XMLToReact` class is instantiated with a map of converters.
 ## Prior Art
 
 * [jsonmltoreact](https://github.com/diffcunha/jsonmltoreact) demonstrated this technique using JsonML, and serves as motivation for this project.
+
+## Development
+
+### Environment
+- Node.js 4.x or greater
+- npm 2.x or greater
+
+### Tests
+- Place your test files in the `test/` directory
+- Ensure the filename ends with `.test.js`
+- Run the linter and unit test suite with the following command:
+```sh
+$ npm run test
+```
 
 ## Thanks
 
