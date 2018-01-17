@@ -102,6 +102,7 @@ The `XMLToReact` class is instantiated with a map of converters.
 
 ## Thanks
 
+* [jsonmltoreact](https://github.com/diffcunha/jsonmltoreact) for the motivation of this project, using JsonML.
 * [xmldom](https://github.com/jindw/xmldom) for providing a solid XML parser.
 * [Rollup](https://github.com/rollup/rollup) for simple and quick module bundling.
 * [React](https://github.com/facebook/react) for the innovation.
