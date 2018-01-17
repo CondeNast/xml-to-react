@@ -122,7 +122,7 @@ The `XMLToReact` class is instantiated with a map of converters.
 - Ensure the filename ends with `.test.js`
 - Run the linter and unit test suite with the following command:
 ```sh
-$ npm run test
+$ npm test
 ```
 
 ## Thanks
