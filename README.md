@@ -1,8 +1,10 @@
-# XML-to-React
-
-[![license](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat)](LICENSE)
+# XML-to-React &middot; [![license](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat)](LICENSE)
 
 Converts an XML document into a React tree.
+
+_Proudly built by:_
+
+<a href="https://technology.condenast.com"><img src="https://user-images.githubusercontent.com/4154804/34785005-e70e4326-f5fd-11e7-8ae6-759c3b0300b5.png" title="Conde Nast Technology" width=350/></a>
 
 ## Installation
 
@@ -105,5 +107,3 @@ The `XMLToReact` class is instantiated with a map of converters.
 * [xmldom](https://github.com/jindw/xmldom) for providing a solid XML parser.
 * [Rollup](https://github.com/rollup/rollup) for simple and quick module bundling.
 * [React](https://github.com/facebook/react) for the innovation.
-
-![Conde Nast Technology Logo](https://user-images.githubusercontent.com/4154804/34785005-e70e4326-f5fd-11e7-8ae6-759c3b0300b5.png)
