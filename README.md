@@ -109,3 +109,7 @@ The `XMLToReact` class is instantiated with a map of converters.
 * [xmldom](https://github.com/jindw/xmldom) for providing a solid XML parser.
 * [Rollup](https://github.com/rollup/rollup) for simple and quick module bundling.
 * [React](https://github.com/facebook/react) for the innovation.
+
+## Contributors
+
+See the list of [contributors](https://github.com/CondeNast/xml-to-react/contributors) who participated in writing this library.
