@@ -11,6 +11,9 @@ _Proudly built by:_
 ## Prerequisites
 
 - React 0.13.x or greater
+- node.js version 0.10.x or greater
+- npm version 1.x or greater
+
 
 ## Installation
 
@@ -114,8 +117,8 @@ The `XMLToReact` class is instantiated with a map of converters.
 ## Development
 
 ### Environment
-- Node.js 4.x or greater
-- npm 2.x or greater
+- Node.js version 8.9.x
+- npm version 5.x
 
 ### Tests
 - Place your test files in the `test/` directory
