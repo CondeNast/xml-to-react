@@ -103,9 +103,12 @@ The `XMLToReact` class is instantiated with a map of converters.
 - `xml` `{string}` - xml node or document
 - `data` `{Object}` - (optional) any data to be passed to all converters
 
+## Prior Art
+
+* [jsonmltoreact](https://github.com/diffcunha/jsonmltoreact) demonstrated this technique using JsonML, and serves as motivation for this project.
+
 ## Thanks
 
-* [jsonmltoreact](https://github.com/diffcunha/jsonmltoreact) for the motivation of this project, using JsonML.
 * [xmldom](https://github.com/jindw/xmldom) for providing a solid XML parser.
 * [Rollup](https://github.com/rollup/rollup) for simple and quick module bundling.
 * [React](https://github.com/facebook/react) for the innovation.
