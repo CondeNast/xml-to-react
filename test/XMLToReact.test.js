@@ -6,7 +6,7 @@ import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import XMLToReact from '../src/XMLToReact';
-import { visitNode } from '../src/helpers';
+import * as helpers from '../src/helpers';
 
 configure({ adapter: new Adapter() });
 
@@ -65,7 +65,7 @@ describe('XMLToReact class ', () => {
     let visitNodeSpy;
 
     before(() => {
-      visitNodeSpy = sandbox.spy(visitNode);
+      visitNodeSpy = sandbox.spy(helpers, 'visitNode');
     });
 
     beforeEach(() => {
@@ -105,6 +105,7 @@ describe('XMLToReact class ', () => {
       const tree = xmltoreact.convert(mockXML);
 
       expect(tree).to.equal(null);
+      expect(visitNodeSpy.called).to.equal(true);
     });
 
     it('returns a React element tree with valid, simple XML without data', () => {
@@ -114,6 +115,7 @@ describe('XMLToReact class ', () => {
       const tree = xmltoreact.convert(mockXML);
 
       expect(tree).not.to.equal(null);
+      expect(visitNodeSpy.called).to.equal(true);
 
       const wrapper = shallow(tree);
 
@@ -133,11 +135,13 @@ describe('XMLToReact class ', () => {
       const tree = xmltoreact.convert(mockXML);
 
       expect(tree).not.to.equal(null);
+      expect(visitNodeSpy.called).to.equal(true);
 
       const wrapper = shallow(tree);
 
       expect(wrapper.exists()).to.equal(true);
       expect(wrapper.find('.test > [fancy]')).to.have.length(1);
+      expect(visitNodeSpy.called).to.equal(true);
     });
 
     it('returns a React element tree with valid XML and valid data', () => {
@@ -146,6 +150,7 @@ describe('XMLToReact class ', () => {
       const tree = xmltoreact.convert(mockXML, mockData);
 
       expect(tree).not.to.equal(null);
+      expect(visitNodeSpy.called).to.equal(true);
 
       const wrapper = shallow(tree);
 
@@ -161,6 +166,7 @@ describe('XMLToReact class ', () => {
           const tree = xmltoreact.convert(mockXML, badData);
 
           expect(tree).not.to.equal(null);
+          expect(visitNodeSpy.called).to.equal(true);
 
           const wrapper = shallow(tree);
 
@@ -170,4 +176,3 @@ describe('XMLToReact class ', () => {
       });
   });
 });
-
