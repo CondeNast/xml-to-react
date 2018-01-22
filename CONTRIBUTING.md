@@ -18,6 +18,21 @@ Open a [new issue](https://github.com/CondeNast/xml-to-react/issues/new). Follow
 
 Open a new pull request. Follow the provided template as a guideline.
 
+### What are the local environment requirements for development?
+
+You must use Node.js version 8.9.x and npm version 5.x for development.
+
+### How do I run tests?
+
+In order to run the linter and unit test suite, run the following command in the root directory:
+```sh
+$ npm test
+```
+
+### How do I create new tests?
+
+Ensure that the filename of a test file ends with `.test.js`, and place your test files in the `test/` directory.
+
 ### Attribution
 These Contributing Guidelines are adapted from the [Atom](https://github.com/atom/atom) Contributing Guidelines,
 available at https://github.com/atom/atom/blob/master/CONTRIBUTING.md and the [Rails](https://github.com/rails/rails/blob/master/CONTRIBUTING.md) Contributing Guidelines available at https://github.com/rails/rails/blob/master/CONTRIBUTING.md.
