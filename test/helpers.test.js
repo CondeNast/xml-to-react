@@ -1,7 +1,5 @@
-import { expect } from 'chai';
+import { DOMParser } from 'xmldom';
 import { isValidElement } from 'react';
-import sinon from 'sinon';
-import { parse as parseXML } from '../src/parser';
 import {
   validateConverters,
   getAttributes,
@@ -10,9 +8,22 @@ import {
 } from '../src/helpers';
 
 describe('helpers', () => {
+  let parseXML;
+
+  beforeAll(() => {
+    // `parseXML` test helper to create XML nodes from strings
+    const throwError = (m) => { throw new Error(m); };
+    const parser = new DOMParser({
+      errorHandler: throwError,
+      fatalError: throwError,
+      warning: throwError,
+    });
+    parseXML = xml => parser.parseFromString(xml, 'text/xml');
+  });
+
   describe('validateConverters', () => {
     it('should export a function', () => {
-      expect(validateConverters).to.be.a('function');
+      expect(validateConverters).toEqual(expect.any(Function));
     });
 
     it('should return `true` if passed an object of only functions', () => {
@@ -21,7 +32,7 @@ describe('helpers', () => {
         bar: () => {},
         baz: () => {},
       };
-      expect(validateConverters(converters)).to.equal(true);
+      expect(validateConverters(converters)).toBeTruthy();
     });
 
     it('should return `false` if any property is not a function', () => {
@@ -30,44 +41,44 @@ describe('helpers', () => {
         bar: 5,
         baz: () => {},
       };
-      expect(validateConverters(converters)).to.equal(false);
+      expect(validateConverters(converters)).not.toBeTruthy();
     });
 
     it('should return `false` if passed an empty object', () => {
-      expect(validateConverters({})).to.equal(false);
-      expect(validateConverters([])).to.equal(false);
+      expect(validateConverters({})).not.toBeTruthy();
+      expect(validateConverters([])).not.toBeTruthy();
     });
 
     it('should return `false` if not provided an object', () => {
-      expect(validateConverters()).to.equal(false);
-      expect(validateConverters('hello')).to.equal(false);
-      expect(validateConverters(5)).to.equal(false);
-      expect(validateConverters(true)).to.equal(false);
-      expect(validateConverters(() => {})).to.equal(false);
-      expect(validateConverters(null)).to.equal(false);
+      expect(validateConverters()).not.toBeTruthy();
+      expect(validateConverters('hello')).not.toBeTruthy();
+      expect(validateConverters(5)).not.toBeTruthy();
+      expect(validateConverters(true)).not.toBeTruthy();
+      expect(validateConverters(() => {})).not.toBeTruthy();
+      expect(validateConverters(null)).not.toBeTruthy();
     });
   });
 
   describe('getAttributes', () => {
     it('should export a function', () => {
-      expect(getAttributes).to.be.a('function');
+      expect(getAttributes).toEqual(expect.any(Function));
     });
 
     it('should return an empty object by default', () => {
-      expect(getAttributes()).to.eql({});
+      expect(getAttributes()).toEqual({});
     });
 
     it('should return an empty object by if the node has no attributes', () => {
-      expect(getAttributes({})).to.eql({});
-      expect(getAttributes({ attributes: null })).to.eql({});
-      expect(getAttributes({ attributes: [] })).to.eql({});
+      expect(getAttributes({})).toEqual({});
+      expect(getAttributes({ attributes: null })).toEqual({});
+      expect(getAttributes({ attributes: [] })).toEqual({});
     });
 
     it('should return all attributes from an XML node', () => {
       const { firstChild } = parseXML('<MyNode foo="hello" bar="5" baz="true"/>');
 
       // @TODO should we expect values to be strings and then be parsed for type, like w/ JSON?
-      expect(getAttributes(firstChild)).to.eql({
+      expect(getAttributes(firstChild)).toEqual({
         foo: 'hello',
         bar: '5',
         baz: 'true',
@@ -77,24 +88,24 @@ describe('helpers', () => {
 
   describe('getChildren', () => {
     it('should export a function', () => {
-      expect(getChildren).to.be.a('function');
+      expect(getChildren).toEqual(expect.any(Function));
     });
 
     it('should return an empty array by default', () => {
-      expect(getChildren()).to.eql([]);
-      expect(getChildren(null)).to.eql([]);
-      expect(getChildren({})).to.eql([]);
+      expect(getChildren()).toEqual([]);
+      expect(getChildren(null)).toEqual([]);
+      expect(getChildren({})).toEqual([]);
     });
 
     it('should return an empty array if node has no children', () => {
       const { firstChild } = parseXML('<MyNode foo="hello" bar="5" baz="true"/>');
-      expect(getChildren(firstChild)).to.eql([]);
+      expect(getChildren(firstChild)).toEqual([]);
     });
 
     it('should return child nodes as an array', () => {
       const { firstChild } = parseXML('<MyDocument><A>foo</A><B>bar</B><C>baz</C></MyDocument>');
       const { childNodes } = firstChild;
-      expect(getChildren(firstChild)).to.eql([
+      expect(getChildren(firstChild)).toEqual([
         childNodes[0],
         childNodes[1],
         childNodes[2],
@@ -104,37 +115,38 @@ describe('helpers', () => {
 
   describe('visitNode', () => {
     it('should export a function', () => {
-      expect(visitNode).to.be.a('function');
+      expect(visitNode).toEqual(expect.any(Function));
     });
 
     it('should return `null` by default', () => {
-      expect(visitNode()).to.equal(null);
+      expect(visitNode()).toBeNull();
     });
 
     it('should return the value of a text node', () => {
       const { firstChild } = parseXML('hello');
-      expect(visitNode(firstChild)).to.equal('hello');
+      expect(visitNode(firstChild)).toBe('hello');
     });
 
     it('should return `null` if no converter is registered by tagName for the given node', () => {
       const converters = {};
       const { firstChild } = parseXML('<a>hello</a>');
-      expect(visitNode(firstChild, 0, converters)).to.equal(null);
+      expect(visitNode(firstChild, 0, converters)).toBeNull();
     });
 
     it('should return `null` if node has no tagName', () => {
       const { firstChild } = parseXML('<!-- comment here -->');
-      expect(visitNode(firstChild, 0, {})).to.equal(null);
+      expect(visitNode(firstChild, 0, {})).toBeNull();
     });
 
     it('should execute a registered converter with attributes and data', () => {
       const converters = {
-        a: sinon.stub().returns({ type: 'foo', props: {} }),
+        a: jest.fn().mockReturnValue({ type: 'foo', props: {} }),
       };
       const data = { foo: 'bar' };
       const { firstChild } = parseXML('<a x="1" y="two">hello</a>');
       visitNode(firstChild, 0, converters, data);
-      sinon.assert.calledWith(converters.a, { x: '1', y: 'two' }, data);
+      expect(converters.a.mock.calls.length).toBe(1);
+      expect(converters.a.mock.calls[0][0]).toEqual({ x: '1', y: 'two' });
     });
 
     it('should create a React element with type provided by the converter', () => {
@@ -143,8 +155,8 @@ describe('helpers', () => {
       };
       const { firstChild } = parseXML('<a>hello</a>');
       const element = visitNode(firstChild, 0, converters);
-      expect(isValidElement(element)).to.equal(true);
-      expect(element.type).to.equal('foo');
+      expect(isValidElement(element)).toEqual(true);
+      expect(element.type).toBe('foo');
     });
 
     it('should create a React element with props provided by the converter', () => {
@@ -159,7 +171,7 @@ describe('helpers', () => {
       const data = { foo: 'bar' };
       const { firstChild } = parseXML('<a x="1" y="two">hello</a>');
       const element = visitNode(firstChild, 0, converters, data);
-      expect(element.props).to.eql({
+      expect(element.props).toEqual({
         children: 'hello',
         keys: ['x', 'y'],
       });
@@ -171,7 +183,7 @@ describe('helpers', () => {
       };
       const { firstChild } = parseXML('<a>hello</a>');
       const element = visitNode(firstChild, 55, converters);
-      expect(element.key).to.equal('55');
+      expect(element.key).toBe('55');
     });
 
     it('should not mutate the props object returned by the converter', () => {
@@ -181,11 +193,11 @@ describe('helpers', () => {
       };
       const { firstChild } = parseXML('<a>hello</a>');
       const element = visitNode(firstChild, 55, converters);
-      expect(element.props).to.eql({
+      expect(element.props).toEqual({
         foo: 'bar',
         children: 'hello',
       });
-      expect(props).to.eql({ foo: 'bar' });
+      expect(props).toEqual({ foo: 'bar' });
     });
 
     it('should create a React element with all visited child elements', () => {
@@ -197,18 +209,18 @@ describe('helpers', () => {
       const { firstChild } = parseXML('<Animals><Dog>Rufus</Dog><Cat>Billy</Cat></Animals>');
       const element = visitNode(firstChild, 0, converters);
 
-      expect(isValidElement(element)).to.equal(true);
-      expect(element.type).to.equal('ul');
-      expect(element.props.children).to.have.length(2);
+      expect(isValidElement(element)).toEqual(true);
+      expect(element.type).toEqual('ul');
+      expect(element.props.children).toHaveLength(2);
       const [dog, cat] = element.props.children;
 
-      expect(isValidElement(dog)).to.equal(true);
-      expect(dog.type).to.equal('li');
-      expect(dog.props).to.eql({ action: 'wag', children: 'Rufus' });
+      expect(isValidElement(element)).toEqual(true);
+      expect(dog.type).toEqual('li');
+      expect(dog.props).toEqual({ action: 'wag', children: 'Rufus' });
 
-      expect(isValidElement(cat)).to.equal(true);
-      expect(cat.type).to.equal('li');
-      expect(cat.props).to.eql({ action: 'purr', children: 'Billy' });
+      expect(isValidElement(element)).toEqual(true);
+      expect(cat.type).toEqual('li');
+      expect(cat.props).toEqual({ action: 'purr', children: 'Billy' });
     });
   });
 });
