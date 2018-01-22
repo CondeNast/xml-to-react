@@ -10,15 +10,12 @@ _Proudly built by:_
 
 ## Prerequisites
 
-- React 0.13.x or greater
-- node.js version 0.10.x or greater
-- npm version 1.x or greater
-
+ This library may only be used in projects using React version 0.13.x or greater.
 
 ## Installation
 
 ```sh
-npm i --save xml-to-react
+npm install --save xml-to-react
 ```
 
 This assumes you are using [npm](https://www.npmjs.com/) as your package manager.
@@ -113,20 +110,6 @@ The `XMLToReact` class is instantiated with a map of converters.
 ## Prior Art
 
 * [jsonmltoreact](https://github.com/diffcunha/jsonmltoreact) demonstrated this technique using JsonML, and serves as motivation for this project.
-
-## Development
-
-### Environment
-- Node.js version 8.9.x
-- npm version 5.x
-
-### Tests
-- Place your test files in the `test/` directory
-- Ensure the filename ends with `.test.js`
-- Run the linter and unit test suite with the following command:
-```sh
-$ npm test
-```
 
 ## Thanks
 
