@@ -32,7 +32,7 @@ describe('helpers', () => {
         bar: () => {},
         baz: () => {},
       };
-      expect(validateConverters(converters)).toBeTruthy();
+      expect(validateConverters(converters)).toEqual(true);
     });
 
     it('should return `false` if any property is not a function', () => {
@@ -41,21 +41,21 @@ describe('helpers', () => {
         bar: 5,
         baz: () => {},
       };
-      expect(validateConverters(converters)).not.toBeTruthy();
+      expect(validateConverters(converters)).not.toEqual(true);
     });
 
     it('should return `false` if passed an empty object', () => {
-      expect(validateConverters({})).not.toBeTruthy();
-      expect(validateConverters([])).not.toBeTruthy();
+      expect(validateConverters({})).not.toEqual(true);
+      expect(validateConverters([])).not.toEqual(true);
     });
 
     it('should return `false` if not provided an object', () => {
-      expect(validateConverters()).not.toBeTruthy();
-      expect(validateConverters('hello')).not.toBeTruthy();
-      expect(validateConverters(5)).not.toBeTruthy();
-      expect(validateConverters(true)).not.toBeTruthy();
-      expect(validateConverters(() => {})).not.toBeTruthy();
-      expect(validateConverters(null)).not.toBeTruthy();
+      expect(validateConverters()).not.toEqual(true);
+      expect(validateConverters('hello')).not.toEqual(true);
+      expect(validateConverters(5)).not.toEqual(true);
+      expect(validateConverters(true)).not.toEqual(true);
+      expect(validateConverters(() => {})).not.toEqual(true);
+      expect(validateConverters(null)).not.toEqual(true);
     });
   });
 
@@ -119,7 +119,7 @@ describe('helpers', () => {
     });
 
     it('should return `null` by default', () => {
-      expect(visitNode()).toBeNull();
+      expect(visitNode()).toEqual(null);
     });
 
     it('should return the value of a text node', () => {
@@ -130,12 +130,12 @@ describe('helpers', () => {
     it('should return `null` if no converter is registered by tagName for the given node', () => {
       const converters = {};
       const { firstChild } = parseXML('<a>hello</a>');
-      expect(visitNode(firstChild, 0, converters)).toBeNull();
+      expect(visitNode(firstChild, 0, converters)).toEqual(null);
     });
 
     it('should return `null` if node has no tagName', () => {
       const { firstChild } = parseXML('<!-- comment here -->');
-      expect(visitNode(firstChild, 0, {})).toBeNull();
+      expect(visitNode(firstChild, 0, {})).toEqual(null);
     });
 
     it('should execute a registered converter with attributes and data', () => {

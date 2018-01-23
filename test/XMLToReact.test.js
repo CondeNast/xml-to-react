@@ -41,7 +41,7 @@ describe('XMLToReact class ', () => {
   };
 
   it('exports a module', () => {
-    expect(XMLToReact).toEqual(expect.any(Function));
+    expect(typeof XMLToReact).toBe('function');
   });
 
   describe('#constructor', () => {
