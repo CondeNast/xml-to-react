@@ -41,21 +41,21 @@ describe('helpers', () => {
         bar: 5,
         baz: () => {},
       };
-      expect(validateConverters(converters)).not.toEqual(true);
+      expect(validateConverters(converters)).toEqual(false);
     });
 
     it('should return `false` if passed an empty object', () => {
-      expect(validateConverters({})).not.toEqual(true);
-      expect(validateConverters([])).not.toEqual(true);
+      expect(validateConverters({})).toEqual(false);
+      expect(validateConverters([])).toEqual(false);
     });
 
     it('should return `false` if not provided an object', () => {
-      expect(validateConverters()).not.toEqual(true);
-      expect(validateConverters('hello')).not.toEqual(true);
-      expect(validateConverters(5)).not.toEqual(true);
-      expect(validateConverters(true)).not.toEqual(true);
-      expect(validateConverters(() => {})).not.toEqual(true);
-      expect(validateConverters(null)).not.toEqual(true);
+      expect(validateConverters()).toEqual(false);
+      expect(validateConverters('hello')).toEqual(false);
+      expect(validateConverters(5)).toEqual(false);
+      expect(validateConverters(true)).toEqual(false);
+      expect(validateConverters(() => {})).toEqual(false);
+      expect(validateConverters(null)).toEqual(false);
     });
   });
 
