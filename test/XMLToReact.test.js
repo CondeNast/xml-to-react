@@ -102,7 +102,7 @@ describe('XMLToReact class ', () => {
 
       const tree = xmltoreact.convert(mockXML);
 
-      expect(tree).toBeNull();
+      expect(tree).toEqual(null);
       expect(visitNodeSpy).toHaveBeenCalled();
     });
 
@@ -112,12 +112,12 @@ describe('XMLToReact class ', () => {
 
       const tree = xmltoreact.convert(mockXML);
 
-      expect(tree).not.toBeNull();
+      expect(tree).not.toEqual(null);
       expect(visitNodeSpy).toHaveBeenCalled();
 
       const wrapper = shallow(tree);
 
-      expect(wrapper.exists()).toBeTruthy();
+      expect(wrapper.exists()).toEqual(true);
       expect(wrapper.find('.test')).toHaveLength(1);
     });
 
@@ -132,12 +132,12 @@ describe('XMLToReact class ', () => {
 
       const tree = xmltoreact.convert(mockXML);
 
-      expect(tree).not.toBeNull();
+      expect(tree).not.toEqual(null);
       expect(visitNodeSpy).toHaveBeenCalled();
 
       const wrapper = shallow(tree);
 
-      expect(wrapper.exists()).toBeTruthy();
+      expect(wrapper.exists()).toEqual(true);
       expect(wrapper.find('.test > [fancy]')).toHaveLength(1);
     });
 
@@ -146,12 +146,12 @@ describe('XMLToReact class ', () => {
       const mockXML = '<test-tag />';
       const tree = xmltoreact.convert(mockXML, mockData);
 
-      expect(tree).not.toBeNull();
+      expect(tree).not.toEqual(null);
       expect(visitNodeSpy).toHaveBeenCalled();
 
       const wrapper = shallow(tree);
 
-      expect(wrapper.exists()).toBeTruthy();
+      expect(wrapper.exists()).toEqual(true);
       expect(wrapper.find('.test')).toHaveLength(1);
     });
 
@@ -162,12 +162,12 @@ describe('XMLToReact class ', () => {
           const mockXML = '<test-tag />';
           const tree = xmltoreact.convert(mockXML, badData);
 
-          expect(tree).not.toBeNull();
+          expect(tree).not.toEqual(null);
           expect(visitNodeSpy).toHaveBeenCalled();
 
           const wrapper = shallow(tree);
 
-          expect(wrapper.exists()).toBeTruthy();
+          expect(wrapper.exists()).toEqual(true);
           expect(wrapper.find('.test')).toHaveLength(1);
         });
       });
