@@ -16,7 +16,7 @@
     "prepublishOnly": "npm run clean && npm run build",
     "pretest": "eslint .",
     "test": "jest  --silent=true",
-    "test-watch": "jest  --silent=true --watch"
+    "test:watch": "jest --silent=true --watch"
   },
   "repository": "https://github.com/CondeNast/xml-to-react",
   "contributors": [
