@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import { DOMParser } from 'xmldom';
 import { isValidElement } from 'react';
 import sinon from 'sinon';
 import { parse as parseXML } from '../src/parser';

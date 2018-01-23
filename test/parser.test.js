@@ -21,8 +21,8 @@ describe('XML parser', () => {
     });
 
     it('should return `null` when no text is passed', () => {
-      expect(parse()).to.be.null;
-      expect(parse('foo')).not.to.be.null;
+      expect(parse()).to.equal(null);
+      expect(parse('foo')).not.to.equal(null);
     });
 
     it('should parse XML from a string', () => {
@@ -39,7 +39,7 @@ describe('XML parser', () => {
       });
 
       it('should return `null`', () => {
-        expect(parse('foo')).to.be.null;
+        expect(parse('foo')).to.equal(null);
       });
 
       it('should log a warning', () => {

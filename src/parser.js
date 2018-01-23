@@ -7,7 +7,7 @@ const throwError = (m) => { throw new Error(m); };
 const parser = new DOMParser({
   errorHandler: throwError,
   fatalError: throwError,
-  warning: throwError
+  warning: throwError,
 });
 
 
