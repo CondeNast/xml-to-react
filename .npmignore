@@ -1,4 +1,12 @@
+.babelrc
+.eslintignore
+.eslintrc.js
+.github
+.nvmrc
+.nycrc
 .nyc_output
 coverage
+examples
+rollup.config.js
 src
 test
