@@ -18,6 +18,32 @@ Open a [new issue](https://github.com/CondeNast/xml-to-react/issues/new). Follow
 
 Open a new pull request. Follow the provided template as a guideline.
 
-### Attribution
+## Development Setup
+
+#### What are the local environment requirements for development?
+
+You must use Node.js version 8.9.x and npm version 5.x for development.
+
+#### How do I install it for local development?
+
+In order to make changes to the code, run the run the following commands in your terminal:
+```sh
+$ git clone https://github.com/CondeNast/xml-to-react.git
+$ cd xml-to-react
+$ npm i
+```
+
+#### How do I run tests?
+
+In order to run the linter and unit test suite, run the following command in terminal:
+```sh
+$ npm test
+```
+
+#### How do I create new tests?
+
+Ensure that the filename of a test file ends with `.test.js`, and place your test files in the `test/` directory.
+
+## Attribution
 These Contributing Guidelines are adapted from the [Atom](https://github.com/atom/atom) Contributing Guidelines,
 available at https://github.com/atom/atom/blob/master/CONTRIBUTING.md and the [Rails](https://github.com/rails/rails/blob/master/CONTRIBUTING.md) Contributing Guidelines available at https://github.com/rails/rails/blob/master/CONTRIBUTING.md.
