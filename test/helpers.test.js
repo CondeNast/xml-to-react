@@ -146,7 +146,7 @@ describe('helpers', () => {
       const { firstChild } = parseXML('<a x="1" y="two">hello</a>');
       visitNode(firstChild, 0, converters, data);
       expect(converters.a).toHaveBeenCalledTimes(1);
-      expect(converters.a).toHaveBeenCalledWith({ x: '1', y: 'two' }, {"foo": "bar"});
+      expect(converters.a).toHaveBeenCalledWith({ x: '1', y: 'two' }, { foo: 'bar' });
     });
 
     it('should create a React element with type provided by the converter', () => {
