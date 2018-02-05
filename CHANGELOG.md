@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 - Initial Release
+- Changed XML parsing to use an internal interface.
 
 <!-- Update the Unreleased comparison range with each release -->
 [Unreleased]: https://github.com/CondeNast/xml-to-react/compare/x.y.z...master
