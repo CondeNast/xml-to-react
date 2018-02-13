@@ -1,5 +1,5 @@
-import { DOMParser } from 'xmldom';
 import { isValidElement } from 'react';
+import { parse as parseXML } from '../src/parser';
 import {
   validateConverters,
   getAttributes,
