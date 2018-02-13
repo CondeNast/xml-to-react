@@ -8,22 +8,9 @@ import {
 } from '../src/helpers';
 
 describe('helpers', () => {
-  let parseXML;
-
-  beforeAll(() => {
-    // `parseXML` test helper to create XML nodes from strings
-    const throwError = (m) => { throw new Error(m); };
-    const parser = new DOMParser({
-      errorHandler: throwError,
-      fatalError: throwError,
-      warning: throwError,
-    });
-    parseXML = xml => parser.parseFromString(xml, 'text/xml');
-  });
-
   describe('validateConverters', () => {
     it('should export a function', () => {
-      expect(validateConverters).toEqual(expect.any(Function));
+      expect(typeof validateConverters).toBe('function');
     });
 
     it('should return `true` if passed an object of only functions', () => {
@@ -61,7 +48,7 @@ describe('helpers', () => {
 
   describe('getAttributes', () => {
     it('should export a function', () => {
-      expect(getAttributes).toEqual(expect.any(Function));
+      expect(typeof getAttributes).toBe('function');
     });
 
     it('should return an empty object by default', () => {
@@ -88,7 +75,7 @@ describe('helpers', () => {
 
   describe('getChildren', () => {
     it('should export a function', () => {
-      expect(getChildren).toEqual(expect.any(Function));
+      expect(typeof getChildren).toBe('function');
     });
 
     it('should return an empty array by default', () => {
@@ -115,7 +102,7 @@ describe('helpers', () => {
 
   describe('visitNode', () => {
     it('should export a function', () => {
-      expect(visitNode).toEqual(expect.any(Function));
+      expect(typeof visitNode).toBe('function');
     });
 
     it('should return `null` by default', () => {

@@ -26,7 +26,7 @@ export function parse(xml) {
   try {
     return parser.parseFromString(xml, 'text/xml');
   } catch (e) {
-    console.warn(ERR_INVALID_XML);
+    console.warn(ERR_INVALID_XML); // eslint-disable-line no-console
   }
 
   return null;
