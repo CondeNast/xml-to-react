@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-import { createSandbox } from 'sinon';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { shallow, configure } from 'enzyme';
@@ -43,37 +41,37 @@ describe('XMLToReact class ', () => {
   };
 
   it('exports a module', () => {
-    expect(XMLToReact).to.be.a('function');
+    expect(typeof XMLToReact).toBe('function');
   });
 
   describe('#constructor', () => {
     it('returns an XMLToReact instance', () => {
-      expect(new XMLToReact(converters)).to.be.an.instanceof(XMLToReact);
+      expect(new XMLToReact(converters)).toBeInstanceOf(XMLToReact);
     });
 
     [123, false, true, {}, [], null, undefined]
       .forEach((badConverters) => {
         it(`returns an XMLToReact instance with invalid converters (${typeof badConverters} -- ${badConverters})`, () => {
           const fn = () => new XMLToReact(badConverters);
-          expect(fn).to.throw(Error);
+          expect(fn).toThrow(Error);
         });
       });
   });
 
   describe('#convert', () => {
-    const sandbox = createSandbox();
     let visitNodeSpy;
 
-    before(() => {
-      visitNodeSpy = sandbox.spy(helpers, 'visitNode');
+    beforeAll(() => {
+      visitNodeSpy = jest.spyOn(helpers, 'visitNode');
     });
 
     beforeEach(() => {
-      sandbox.resetHistory();
+      visitNodeSpy.mockClear();
     });
 
-    after(() => {
-      sandbox.restore();
+    afterAll(() => {
+      visitNodeSpy.mockReset();
+      visitNodeSpy.mockRestore();
     });
 
     [123, false, true, {}, [], null, undefined]
@@ -82,8 +80,8 @@ describe('XMLToReact class ', () => {
           const xmltoreact = new XMLToReact(converters);
           const tree = xmltoreact.convert(badXML);
 
-          expect(tree).to.equal(null);
-          expect(visitNodeSpy.called).to.equal(false);
+          expect(tree).toEqual(null);
+          expect(visitNodeSpy).not.toHaveBeenCalled();
         });
       });
 
@@ -93,8 +91,8 @@ describe('XMLToReact class ', () => {
           const xmltoreact = new XMLToReact(converters);
           const tree = xmltoreact.convert(badXML);
 
-          expect(tree).to.equal(null);
-          expect(visitNodeSpy.called).to.equal(false);
+          expect(tree).toEqual(null);
+          expect(visitNodeSpy).not.toHaveBeenCalled();
         });
       });
 
@@ -104,8 +102,8 @@ describe('XMLToReact class ', () => {
 
       const tree = xmltoreact.convert(mockXML);
 
-      expect(tree).to.equal(null);
-      expect(visitNodeSpy.called).to.equal(true);
+      expect(tree).toEqual(null);
+      expect(visitNodeSpy).toHaveBeenCalled();
     });
 
     it('returns a React element tree with valid, simple XML without data', () => {
@@ -114,13 +112,13 @@ describe('XMLToReact class ', () => {
 
       const tree = xmltoreact.convert(mockXML);
 
-      expect(tree).not.to.equal(null);
-      expect(visitNodeSpy.called).to.equal(true);
+      expect(tree).not.toEqual(null);
+      expect(visitNodeSpy).toHaveBeenCalled();
 
       const wrapper = shallow(tree);
 
-      expect(wrapper.exists()).to.equal(true);
-      expect(wrapper.find('.test')).to.have.length(1);
+      expect(wrapper.exists()).toEqual(true);
+      expect(wrapper.find('.test')).toHaveLength(1);
     });
 
 
@@ -134,14 +132,13 @@ describe('XMLToReact class ', () => {
 
       const tree = xmltoreact.convert(mockXML);
 
-      expect(tree).not.to.equal(null);
-      expect(visitNodeSpy.called).to.equal(true);
+      expect(tree).not.toEqual(null);
+      expect(visitNodeSpy).toHaveBeenCalled();
 
       const wrapper = shallow(tree);
 
-      expect(wrapper.exists()).to.equal(true);
-      expect(wrapper.find('.test > [fancy]')).to.have.length(1);
-      expect(visitNodeSpy.called).to.equal(true);
+      expect(wrapper.exists()).toEqual(true);
+      expect(wrapper.find('.test > [fancy]')).toHaveLength(1);
     });
 
     it('returns a React element tree with valid XML and valid data', () => {
@@ -149,13 +146,13 @@ describe('XMLToReact class ', () => {
       const mockXML = '<test-tag />';
       const tree = xmltoreact.convert(mockXML, mockData);
 
-      expect(tree).not.to.equal(null);
-      expect(visitNodeSpy.called).to.equal(true);
+      expect(tree).not.toEqual(null);
+      expect(visitNodeSpy).toHaveBeenCalled();
 
       const wrapper = shallow(tree);
 
-      expect(wrapper.exists()).to.equal(true);
-      expect(wrapper.find('.test')).to.have.length(1);
+      expect(wrapper.exists()).toEqual(true);
+      expect(wrapper.find('.test')).toHaveLength(1);
     });
 
     [123, false, true, {}, [], null, undefined]
@@ -165,13 +162,13 @@ describe('XMLToReact class ', () => {
           const mockXML = '<test-tag />';
           const tree = xmltoreact.convert(mockXML, badData);
 
-          expect(tree).not.to.equal(null);
-          expect(visitNodeSpy.called).to.equal(true);
+          expect(tree).not.toEqual(null);
+          expect(visitNodeSpy).toHaveBeenCalled();
 
           const wrapper = shallow(tree);
 
-          expect(wrapper.exists()).to.equal(true);
-          expect(wrapper.find('.test')).to.have.length(1);
+          expect(wrapper.exists()).toEqual(true);
+          expect(wrapper.find('.test')).toHaveLength(1);
         });
       });
   });
