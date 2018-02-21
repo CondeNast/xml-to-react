@@ -8,10 +8,10 @@ const pkg = require('./package.json');
 export default [
 
   {
-    name: 'XMLToReact',
     input: 'src/XMLToReact.js',
     output: [
       {
+        name: 'XMLToReact',
         file: pkg.browser,
         format: 'umd',
         globals: {
