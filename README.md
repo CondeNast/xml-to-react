@@ -4,6 +4,7 @@ Converts an XML document into a React tree.
 
 [![license](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/CondeNast/xml-to-react.svg?branch=master)](https://travis-ci.org/CondeNast/xml-to-react)
+[![Coverage Status](https://coveralls.io/repos/github/CondeNast/xml-to-react/badge.svg)](https://coveralls.io/github/CondeNast/xml-to-react)
 
 _Proudly built by:_
 
