@@ -22,6 +22,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+- chore: Add build script to travis-ci config, so CI runs ensure build does not fail
+
 ## 1.0.0 - 2018-03-01
 - Initial Release
 - Changed XML parsing to use an internal interface.
