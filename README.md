@@ -17,7 +17,7 @@ _Proudly built by:_
 ## Installation
 
 ```sh
-npm install --save xml-to-react
+npm install --save @condenast/xml-to-react
 ```
 
 This assumes you are using [npm](https://www.npmjs.com/) as your package manager.
