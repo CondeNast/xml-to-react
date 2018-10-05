@@ -17,7 +17,7 @@ _Proudly built by:_
 ## Installation
 
 ```sh
-npm install --save xml-to-react
+npm install --save @condenast/xml-to-react
 ```
 
 This assumes you are using [npm](https://www.npmjs.com/) as your package manager.
@@ -25,7 +25,7 @@ This assumes you are using [npm](https://www.npmjs.com/) as your package manager
 ## Usage
 
 ```js
-import XMLToReact from 'xml-to-react';
+import XMLToReact from '@condenast/xml-to-react';
 
 const xmlToReact = new XMLToReact({/* converters */});
 const reactTree = xmlToReact.convert(/* XML string */);
@@ -37,7 +37,7 @@ Convert XML nodes into DOM elements with any provided attributes
 
 ```js
 import ReactDOM from 'react-dom';
-import XMLToReact from 'xml-to-react';
+import XMLToReact from '@condenast/xml-to-react';
 import MyListItem from './MyListItem';
 
 const xmlToReact = new XMLToReact({
