@@ -122,3 +122,6 @@ The `XMLToReact` class is instantiated with a map of converters.
 ## Contributors
 
 See the list of [contributors](https://github.com/CondeNast/xml-to-react/contributors) who participated in writing this library.
+## Maintainers
+
+ * Daniel Taveras (@taveras)
