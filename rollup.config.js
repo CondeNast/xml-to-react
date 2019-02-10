@@ -24,7 +24,6 @@ export default [
       commonjs(),
       peerDeps(),
       babel({
-        presets: ['es2015-rollup'],
         babelrc: false,
       }),
     ],
@@ -46,7 +45,6 @@ export default [
       commonjs(),
       peerDeps(),
       babel({
-        presets: ['es2015-rollup'],
         babelrc: false,
       }),
     ],
