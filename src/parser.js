@@ -15,7 +15,7 @@ const parser = new DOMParser({
  * Parse an xml string
  *
  * @param {string} xml - xml to convert
- * @returns {Object} - xml tree
+ * @returns {object} - xml tree
  * @public
  */
 export function parse(xml) {
