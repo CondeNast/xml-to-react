@@ -5,6 +5,7 @@ const ERR_INVALID_CONVERTERS = 'XMLToReact: Invalid value for converter map argu
 
 /**
  * Class representing an XML to React transformer.
+ *
  * @public
  */
 export default class XMLToReact {
