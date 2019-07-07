@@ -41,7 +41,7 @@
     "eslint": "^5.0.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-jsdoc": "^11.0.0",
+    "eslint-plugin-jsdoc": "^13.0.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "jest": "^24.8.0",
