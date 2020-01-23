@@ -106,7 +106,6 @@ describe('helpers', () => {
   });
 
   describe('visitNode', () => {
-
     it('should export a function', () => {
       expect(typeof visitNode).toBe('function');
     });
