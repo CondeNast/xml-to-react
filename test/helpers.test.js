@@ -8,7 +8,6 @@ import {
 } from '../src/helpers';
 
 describe('helpers', () => {
-
   afterEach(() => {
     jest.resetAllMocks();
   });

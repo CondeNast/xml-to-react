@@ -93,8 +93,6 @@ export function visitNode(node, index, converters, data, debug) {
     return null;
   }
 
-  debug = debug === true;
-
   const { tagName, nodeType } = node;
 
   // if this is a text node
@@ -109,7 +107,7 @@ export function visitNode(node, index, converters, data, debug) {
   const converter = converters[tagName];
 
   if (typeof converter !== 'function') {
-    if (debug) {
+    if (debug === true) {
       // eslint-disable-next-line no-console
       console.log(`No converter found for tagName "${tagName}"`);
     }
