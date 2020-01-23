@@ -12,9 +12,8 @@
   "scripts": {
     "build": "rollup -c",
     "clean": "rm -rf dist",
-    "dts": "./node_modules/.bin/npm-dts generate",
     "lint": "eslint .",
-    "prepublishOnly": "npm run clean && npm run build && npm run dts",
+    "prepublishOnly": "npm run clean && npm run build",
     "pretest": "eslint .",
     "test": "jest --silent=true",
     "test:watch": "jest --silent=true --watch"
@@ -46,7 +45,6 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "jest": "^24.8.0",
-    "npm-dts": "^1.2.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.1",
