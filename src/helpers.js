@@ -83,10 +83,12 @@ export function getChildren(node) {
  * @param {number} index - Node index to be used as the key
  * @param {object} converters - Map of XML tag names to component generating functions
  * @param {object} [data] - Optional data to be passed to coverters
+ * @param {boolean} [debug] - Optional flag to enable additional
+ *                            developer debug information.
  * @returns {object} React element
  * @private
  */
-export function visitNode(node, index, converters, data) {
+export function visitNode(node, index, converters, data, debug) {
   if (!node) {
     return null;
   }
@@ -105,6 +107,10 @@ export function visitNode(node, index, converters, data) {
   const converter = converters[tagName];
 
   if (typeof converter !== 'function') {
+    if (debug === true) {
+      // eslint-disable-next-line no-console
+      console.log(`No converter found for tagName "${tagName}"`);
+    }
     return null;
   }
 

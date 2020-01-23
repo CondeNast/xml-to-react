@@ -8,6 +8,10 @@ import {
 } from '../src/helpers';
 
 describe('helpers', () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
   describe('validateConverters', () => {
     it('should export a function', () => {
       expect(typeof validateConverters).toBe('function');
@@ -118,6 +122,14 @@ describe('helpers', () => {
       const converters = {};
       const { firstChild } = parseXML('<a>hello</a>');
       expect(visitNode(firstChild, 0, converters)).toEqual(null);
+    });
+
+    it('should log message if no converter is registered by tagName for the given node if debug is enabled', () => {
+      jest.spyOn(global.console, 'log');
+      const converters = {};
+      const { firstChild } = parseXML('<a>hello</a>');
+      visitNode(firstChild, 0, converters, null, true);
+      expect(console.log).toHaveBeenCalledTimes(1);
     });
 
     it('should return `null` if node has no tagName', () => {
