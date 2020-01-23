@@ -14,9 +14,13 @@ export default class XMLToReact {
    *
    * @param {object} converters - a mapping of tag names to a function
    *                              returning the desired mapping.
+   * @param {boolean} [debug] - optional flag to enable additional
+   *                            developer debug information.
    * @public
    */
-  constructor(converters) {
+  constructor(converters, debug) {
+    this.debug = debug === true;
+
     const isValid = validateConverters(converters);
     if (!isValid) {
       throw new Error(ERR_INVALID_CONVERTERS);
@@ -44,6 +48,6 @@ export default class XMLToReact {
       return null;
     }
 
-    return visitNode(tree.documentElement, 0, this.converters, data);
+    return visitNode(tree.documentElement, 0, this.converters, data, this.debug);
   }
 }
