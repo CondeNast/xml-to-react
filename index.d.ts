@@ -1,5 +1,23 @@
-
 declare module '@condenast/xml-to-react' {
-  import main = require('@condenast/xml-to-react/index');
-  export = main;
+  /**
+   * Create a XML to React converter.
+   *
+   * @param {object} converters - a mapping of tag names to a function
+   *                              returning the desired mapping.
+   * @public
+   */
+  class XMLToReact {
+    constructor(converters: any);
+    /**
+     * Create a XML to React converter.
+     *
+     * @param {string} xml - xml to convert
+     * @param {object} [data] - optional data to assist in conversion
+     * @returns {object} - React element tree
+     * @public
+     */
+    public convert(xml: string, data?: any): any;
+  }
+
+  export = XMLToReact;
 }
