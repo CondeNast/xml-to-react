@@ -46,8 +46,8 @@
     "eslint-plugin-react": "^7.7.0",
     "jest": "^24.8.0",
     "prop-types": "^15.6.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "rollup": "^1.0.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^10.0.0",
@@ -55,6 +55,6 @@
     "rollup-plugin-peer-deps-external": "^2.0.0"
   },
   "peerDependencies": {
-    "react": "^0.13.0 || ^0.14.0 || ^15.0.0 || ^16"
+    "react": "^18.0.0"
   }
 }
