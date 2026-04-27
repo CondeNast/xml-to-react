@@ -27,7 +27,7 @@
   "bugs": "https://github.com/CondeNast/xml-to-react/issues",
   "homepage": "https://github.com/CondeNast/xml-to-react#readme",
   "dependencies": {
-    "xmldom": "^0.1.27"
+    "xmldom": "^0.6.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
